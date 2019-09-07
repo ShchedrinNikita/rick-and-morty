@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import './Card.scss'
+import { Link, withRouter } from 'react-router-dom'
 
 
 export default class Card extends Component {
     render() {
         return (
-            <div className='card'>
+            <Link to={ `/${this.props.match.params.currentType}/id-${this.props.element.id}` } className='card'>
                 { this.props.element.image ? <div className="image"><img src={this.props.element.image} alt=""/></div> : null}
                 <div className="info">
                     <div className="name">{this.props.element.name}</div>
-                    <div className="id" onClick={this.props.nextPage}>ID:{this.props.element.id}</div>
+                    <div className="id">ID:{this.props.element.id}</div>
                     { this.props.element.type & this.props.element.dimension  ? <div className="type">{this.props.element.type}</div> : null }
                     { this.props.element.dimension ? <div className="dimension">{this.props.element.dimension}</div> : null }
                     { this.props.element.residents ? <div className="residents">Residents: {this.props.element.residents.length}</div> : null }
@@ -18,7 +19,7 @@ export default class Card extends Component {
                     { this.props.element.status ? <div className="status">{this.props.element.status}</div> : null}
                     { this.props.element.air_date ? <div className="relise-date">Relise date: {this.props.element.air_date}</div> : null}
                 </div>
-            </div>
+            </Link>
         )
     }
 }

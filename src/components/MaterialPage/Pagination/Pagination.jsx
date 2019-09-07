@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import './Pagination.scss'
 
 const Pagination = ({ pageCount, match, history }) => {
     const pages = []
     for (let i = 1; i <= pageCount; i++) {
-        pages.push(<Link to={`/${match.params.currentType}/page-${i}`}>{i}</Link>)
+        pages.push(<Link className={ i === +match.params.currentPage ? "page-number active" : "page-number"} to={`/${match.params.currentType}/page-${i}`} key={i}>{i}</Link>)
     }
 
     const swipePage = (direction) => {
@@ -16,10 +17,10 @@ const Pagination = ({ pageCount, match, history }) => {
         }
     }
     return (
-        <div>
-            <div className="prev-btn" onClick={() => swipePage('prev')}>prev</div>
+        <div className="pagination">
+            <div className={ 1 !== +match.params.currentPage ? "arrow active" : "arrow"} onClick={() => swipePage('prev')}><i className="fas fa-chevron-left"></i></div>
             {pages}
-            <div className="next-btn" onClick={() => swipePage('next')}>next</div>
+            <div className={ pageCount !== +match.params.currentPage ? "arrow active" : "arrow" } onClick={() => swipePage('next')}><i className="fas fa-chevron-right"></i></div>
         </div>
     )
 }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import CardSet from './CardSet/CardSet'
 import axios from 'axios'
-import Card from './CardSet/Card/Card'
+// import Card from './CardSet/Card/Card'
 import Pagination from './Pagination/Pagination'
+import './MaterialPage.scss'
 
 
 export default class MaterialPage extends Component {
@@ -25,15 +26,16 @@ export default class MaterialPage extends Component {
             data: results,
             currentPage: this.props.match.params.currentPage
         })
-        console.log(results)  
+        const char = await axios.get('https://rickandmortyapi.com/api/character/61')
+        console.log(char, results)  
     }
     render() {
         if(!this.props[this.props.match.params.currentType].data) return null 
         return (
-            <div>
+            <div className='material-page'>
                 <Pagination pageCount={ this.props[this.props.match.params.currentType].data.info.pages}/>
-               {/* <CardSet/>  */}
-               <div className="card-set">{ this.props[this.props.match.params.currentType].data.results.map(el => <Card  element={el} key={el.id} />)}</div>
+                <CardSet set={ this.props[this.props.match.params.currentType].data.results}/> 
+               {/* <div className="card-set">{ this.props[this.props.match.params.currentType].data.results.map(el => <Card  element={el} key={el.id} />)}</div> */}
             </div>
         )
     }
