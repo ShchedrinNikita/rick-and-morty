@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Card.scss'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 export default class Card extends Component {
