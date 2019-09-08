@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Axios from 'axios';
+import './CardInfo.scss'
 
 export default class CardInfo extends Component {
     
@@ -26,19 +27,21 @@ export default class CardInfo extends Component {
         
 
         return (
-            <div>
-                { this.props.cardInfo.image ? <div className="image"><img src={this.props.cardInfo.image} alt=""/></div> : null}
+            <div className="card-info">
                 <div className="info">
                     <div className="name">{this.props.cardInfo.name}</div>
                     <div className="id">ID:{this.props.cardInfo.id}</div>
-                    { this.props.cardInfo.type & this.props.cardInfo.dimension  ? <div className="type">{this.props.cardInfo.type}</div> : null }
-                    { this.props.cardInfo.dimension ? <div className="dimension">{this.props.cardInfo.dimension}</div> : null }
+                    { this.props.cardInfo.status ? <div className="status">Status: {this.props.cardInfo.status}</div> : null}
+                    { this.props.cardInfo.type ? <div className="type">Type: {this.props.cardInfo.type}</div> : null }
+                    { this.props.cardInfo.gender ? <div className="gender">Gender: {this.props.cardInfo.gender}</div> : null }
+                    { this.props.cardInfo.location ? <div className="location">Location: {this.props.cardInfo.location.name}</div> : null }
+                    { this.props.cardInfo.dimension ? <div className="dimension">Dimension: {this.props.cardInfo.dimension}</div> : null }
                     { this.props.cardInfo.residents ? <div className="residents">Residents: {this.props.cardInfo.residents.length}</div> : null }
-                    { this.props.cardInfo.species ? <div className="species">{this.props.cardInfo.species}</div> : null} 
-                    { this.props.cardInfo.origin ? <div className="origin">{this.props.cardInfo.origin.name}</div> : null}
-                    { this.props.cardInfo.status ? <div className="status">{this.props.cardInfo.status}</div> : null}
+                    { this.props.cardInfo.species ? <div className="species">Species: {this.props.cardInfo.species}</div> : null} 
+                    { this.props.cardInfo.origin ? <div className="origin">Origin: {this.props.cardInfo.origin.name}</div> : null}
                     { this.props.cardInfo.air_date ? <div className="relise-date">Relise date: {this.props.cardInfo.air_date}</div> : null}
                 </div>
+                { this.props.cardInfo.image ? <div className="image"><img src={this.props.cardInfo.image} alt=""/></div> : null}
             </div>
         )
     }

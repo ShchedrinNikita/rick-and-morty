@@ -9,6 +9,10 @@
     align-items: center;
     border-radius: 5px;
     overflow: hidden;
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0px 2px 10px #315EFE;
+    }
     .info {
         display: flex;
         flex-direction: column;

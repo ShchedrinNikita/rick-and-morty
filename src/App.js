@@ -33,7 +33,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navigation charactersCurrentPage={ this.state.characters.currentPage } locationsCurrentPage={ this.state.locations.currentPage } episodesCurrentPage={ this.state.episodes.currentPage }/>
+        <Navigation match={ this.props.match } charactersCurrentPage={ this.state.characters.currentPage } locationsCurrentPage={ this.state.locations.currentPage } episodesCurrentPage={ this.state.episodes.currentPage }/>
         <Switch>
           <Route path='/:currentType/page-:currentPage' exact render={(props) => <MaterialPage {...props} characters={this.state.characters.data} locations={this.state.locations.data} episodes={this.state.episodes.data} setStateData={this.setStateData}/>}/>
           <Route path='/:currentType/id-:currentId' exact render={(props) => <CardInfo {...props} cardInfo={this.state.cardInfo.data} setStateData={this.setStateData}/>}/>
