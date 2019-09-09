@@ -9,13 +9,13 @@ import './MaterialPage.scss'
 export default class MaterialPage extends Component {
 
     componentDidMount() {
-        if(!this.props[this.props.match.params.currentType].data) {
+        if(!this.props[this.props.match.params.currentType].results) {
             this.loadData()
         }
     }
     
     componentDidUpdate(prevProps) {
-        if(prevProps.match.params.currentType !== this.props.match.params.currentType && !this.props[this.props.match.params.currentType].data || prevProps.match.params.currentPage !== this.props.match.params.currentPage) {
+        if((prevProps.match.params.currentType !== this.props.match.params.currentType && !this.props[this.props.match.params.currentType].results) || prevProps.match.params.currentPage !== this.props.match.params.currentPage) {
             this.loadData()
         }
     }
@@ -23,18 +23,17 @@ export default class MaterialPage extends Component {
     async loadData() {
         const results = await axios.get(`https://rickandmortyapi.com/api/${this.props.match.params.currentType.slice(0, -1)}/?page=${this.props.match.params.currentPage}`)
         this.props.setStateData(this.props.match.params.currentType , { 
-            data: results,
+            data: results.data,
             currentPage: this.props.match.params.currentPage
         })
-        const char = await axios.get('https://rickandmortyapi.com/api/character/61')
-        console.log(char, results)  
+        this.props.setStateCurrentType(this.props.match.params.currentType)
     }
     render() {
-        if(!this.props[this.props.match.params.currentType].data) return null 
+        if(!this.props[this.props.match.params.currentType].results) return null 
         return (
             <div className='material-page'>
-                <Pagination pageCount={ this.props[this.props.match.params.currentType].data.info.pages}/>
-                <CardSet set={ this.props[this.props.match.params.currentType].data.results}/> 
+                <Pagination pageCount={ this.props[this.props.match.params.currentType].info.pages}/>
+                <CardSet set={ this.props[this.props.match.params.currentType].results}/> 
                {/* <div className="card-set">{ this.props[this.props.match.params.currentType].data.results.map(el => <Card  element={el} key={el.id} />)}</div> */}
             </div>
         )
