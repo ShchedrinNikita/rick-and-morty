@@ -4,6 +4,7 @@ import MaterialPage from'./components/MaterialPage/MaterialPage'
 import Navigation from './components/Navigation/Navigation'
 import CardInfo from './components/CardInfo/CardInfo'
 import { Switch, Route, Redirect } from 'react-router-dom'
+// import CardInfoOnHook from './components/CardInfo/CardInfoOnHook';
 
 export default class App extends Component {
 
@@ -19,9 +20,6 @@ export default class App extends Component {
     episodes: {
       data: {},
       currentPage: 1
-    },
-    cardInfo: {
-      data: {}
     },
     currentType: ''
   }
@@ -43,9 +41,9 @@ export default class App extends Component {
           <Route path='/:currentType/page-:currentPage' exact render={(props) => <MaterialPage {...props} characters={this.state.characters.data} locations={this.state.locations.data} episodes={this.state.episodes.data} setStateData={this.setStateData} setStateCurrentType={this.setStateCurrentType}/>}/>
           {/* <Route path='/:currentType/id-:currentId' exact render={(props) => <CardInfo {...props} cardInfo={this.state.cardInfo.data} setStateData={this.setStateData}/>}/> */}
           <Route path='/:currentType/id-:currentId' exact render={(props) => {
-            if ( this.state[props.match.params.currentType].data.results.find(el => el.id === +props.match.params.currentId) ) {
-              return <CardInfo cardInfo={this.state[props.match.params.currentType].data.results.find(el => el.id === +props.match.params.currentId)}/>
-            } else return null
+            if ( this.state[props.match.params.currentType].data.results ) {
+              return <CardInfo {...props} cardInfo={this.state[props.match.params.currentType].data.results.find(el => el.id === +props.match.params.currentId)}/>
+            } else { return (<CardInfo {...props} cardInfo={ null }/>) }
             }
           }/>
           <Redirect from='/:currentType' to='/:currentType/page-1' exact/>

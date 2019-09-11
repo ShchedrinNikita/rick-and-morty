@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import CardSet from './CardSet/CardSet'
 import axios from 'axios'
-// import Card from './CardSet/Card/Card'
 import Pagination from './Pagination/Pagination'
 import './MaterialPage.scss'
-
 
 export default class MaterialPage extends Component {
 
@@ -34,7 +32,6 @@ export default class MaterialPage extends Component {
             <div className='material-page'>
                 <Pagination pageCount={ this.props[this.props.match.params.currentType].info.pages}/>
                 <CardSet set={ this.props[this.props.match.params.currentType].results}/> 
-               {/* <div className="card-set">{ this.props[this.props.match.params.currentType].data.results.map(el => <Card  element={el} key={el.id} />)}</div> */}
             </div>
         )
     }
